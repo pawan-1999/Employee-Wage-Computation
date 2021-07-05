@@ -1,6 +1,5 @@
-using System;
 
-namespace UC_6LimitationOfWorkingHrs
+namespace UC_7RefactorByAddingTheMethodToCalculateempwage
 {
     class Program
     {
@@ -9,12 +8,13 @@ namespace UC_6LimitationOfWorkingHrs
         public const int EMP_RATE_PER_HOUR = 20;
         public const int NUM_OF_WORKING_DAYS = 20;
         public const int MAX_HRS_IN_MONTH = 100;
-        static void Main(string[] args)
+        
+        public static int computeEmpWage()
         {
-            //variable
+            //Variable
             int empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 0;
             //Computation
-            while(totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS )
+            while (totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < MAX_HRS_IN_MONTH)
             {
                 totalWorkingDays++;
                 Random random = new Random();
@@ -32,11 +32,15 @@ namespace UC_6LimitationOfWorkingHrs
                         break;
                 }
                 totalEmpHrs += empHrs;
-                Console.WriteLine("days:"+totalWorkingDays+" Emp Hrs :"+empHrs);
+                Console.WriteLine("Day :" + totalWorkingDays + " Emp Wage : " + empHrs);
             }
             int totalEmpWage = totalEmpHrs * EMP_RATE_PER_HOUR;
-            Console.WriteLine("Total Emp wage: "+totalEmpWage);
+            Console.WriteLine("Total emp wage : " + totalEmpWage);
+            return totalEmpWage;
+        } 
+        static void Main(string[] args)
+        {
+            computeEmpWage();
         }
     }
 }
-
