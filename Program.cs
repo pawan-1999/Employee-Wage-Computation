@@ -1,22 +1,39 @@
 using System;
+using System.Collections.Generic;
+using System.Text;
 
-namespace UC_8AbillityToComputeEmpwageForMultipleCompany
+namespace EmployeeWageComputation
 {
-    class Program
+    class UC_9
     {
         public const int IS_PART_TIME = 1;
         public const int IS_FULL_TIME = 2;
-        public static int computeEmpWage(String company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth)
+
+        private string company;
+        private int empRatePerHour;
+        private int numOfWorkingDays;
+        private int maxHoursPerMonth;
+        private int totalEmpWage;
+
+        public void empWageBuilderObject(string company, int empRatePerHour, int numOfWorkingDays, int maxHoursPerMonth)
+        {
+            this.company = company;
+            this.empRatePerHour = empRatePerHour;
+            this.numOfWorkingDays = numOfWorkingDays;
+            this.maxHoursPerMonth = maxHoursPerMonth;
+        }
+
+        public void computeEmpWage()
         {
             //Variable
             int empHrs = 0, totalEmpHrs = 0, totalWorkingDays = 0;
             //Computation
-            while(totalEmpHrs <= maxHoursPerMonth && totalWorkingDays < numOfWorkingDays)
+            while (totalEmpHrs <= this.maxHoursPerMonth && totalWorkingDays < this.numOfWorkingDays)
             {
                 totalWorkingDays++;
                 Random random = new Random();
                 int empCheck = random.Next(0, 3);
-                switch(empCheck)
+                switch (empCheck)
                 {
                     case IS_PART_TIME:
                         empHrs = 4;
@@ -29,17 +46,29 @@ namespace UC_8AbillityToComputeEmpwageForMultipleCompany
                         break;
                 }
                 totalEmpHrs += empHrs;
-                Console.WriteLine("Day : "+totalWorkingDays+" Emp Hours : " +empHrs);
+                Console.WriteLine("Day:" + totalWorkingDays + " Emp Hours:" + empHrs);
             }
-            int totalEmpWage = totalEmpHrs * empRatePerHour;
-            Console.WriteLine("Total Emp Wage for company :" +company+ " is " +totalEmpWage);
-            return totalEmpWage;
+            totalEmpWage = totalEmpHrs * this.empRatePerHour;
+            Console.WriteLine("Total Emp Wage For Company : " + company + " is " + totalEmpWage);
         }
-        static void Main(string[] args)
+
+        public string toString()
         {
-            computeEmpWage("DMart",20,2,10);
-            computeEmpWage("Reliance",20,4,20);
+            return "Total Emp Wage For Company : " + this.company + " is " + this.totalEmpWage;
         }
     }
 }
 
+
+static void Main(string[] args)
+
+        {
+	    UC_9 dMart = new UC_9();
+            dMart.empWageBuilderObject("DMart", 20, 2, 10);
+            UC_9 reliance = new UC_9();
+            reliance.empWageBuilderObject("Reliance", 10, 4, 20);
+            dMart.computeEmpWage();
+            Console.WriteLine(dMart.toString());
+            reliance.computeEmpWage();
+            Console.WriteLine(reliance.toString());
+        } 
